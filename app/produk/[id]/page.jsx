@@ -2,16 +2,28 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import TombolWhatsApp from "@/components/TombolWhatsApp";
 import CatatanBelumAktif from "@/components/CatatanBelumAktif";
-import { cariProdukContoh } from "@/lib/data-contoh";
 import { formatRupiah } from "@/lib/format";
+import { createServerClient } from "@/lib/supabase/server";
 
-// US-02: halaman ini masih memakai data contoh.
-// Tugas peserta: ambil satu produk dari Supabase berdasarkan id, di sisi server.
 export default async function HalamanDetailProduk({ params }) {
   const { id } = await params;
-  const produk = cariProdukContoh(id);
 
-  if (!produk) {
+  let produk = null;
+
+  try {
+    const supabase = createServerClient();
+    const { data, error } = await supabase
+      .from("produk")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+
+    if (error || !data) {
+      notFound();
+    }
+
+    produk = data;
+  } catch {
     notFound();
   }
 

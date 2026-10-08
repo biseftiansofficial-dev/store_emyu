@@ -20,10 +20,15 @@ Membuat helper Supabase server client di lib/supabase/server.js menggunakan crea
 ## US-02 Detail produk
 
 **Prompt:**
+Baca docs/user-stories.md bagian US-02.
+
+Ubah app/produk/[id]/page.jsx supaya mengambil satu produk dari tabel "produk" di Supabase berdasarkan id di URL, di sisi server, memakai koneksi Supabase yang sudah dibuat di lib/supabase. Kalau produk tidak ditemukan, panggil notFound(). Jangan ubah tampilannya. Hapus CatatanBelumAktif dari halaman ini, tapi biarkan tombol WhatsApp.
 
 **Hasil:**
+Halaman detail produk di `app/produk/[id]/page.jsx` berhasil mengambil detail produk berdasarkan `id` langsung dari database Supabase. Jika produk tidak ditemukan atau ID salah, fungsi `notFound()` dipanggil sehingga halaman 404 ditampilkan. Tampilan tetap rapi dan tombol WhatsApp tetap dipertahankan.
 
 **Perbaikan:**
+Menggunakan `const { id } = await params` dan `maybeSingle()` pada query Supabase agar tidak menimbulkan unhandled exception ketika ID tidak ada di tabel.
 
 ## US-03 Pesan via WhatsApp
 
