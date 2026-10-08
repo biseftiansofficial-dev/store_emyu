@@ -33,10 +33,15 @@ Menggunakan `const { id } = await params` dan `maybeSingle()` pada query Supabas
 ## US-03 Pesan via WhatsApp
 
 **Prompt:**
+Baca docs/rancangan-teknis.md bagian "Pesan WhatsApp (US-03)".
+
+Ubah components/TombolWhatsApp.jsx menjadi tautan yang membuka https://wa.me/ ke nomor di lib/toko.js, dengan pesan otomatis berisi nama dan harga produk dalam format rupiah. Pesan di-encode dengan encodeURIComponent dan dibuka di tab baru. Pertahankan tampilan tombolnya. Hapus CatatanBelumAktif yang menyebut US-03 di halaman detail produk.
 
 **Hasil:**
+Tombol "Pesan via WhatsApp" berhasil diubah menjadi tautan yang membuka `https://wa.me/` langsung ke nomor WhatsApp toko. Pesan otomatis telah terisi dengan nama dan harga produk yang diformat rupiah dan di-encode. Tombol terbuka di tab baru dengan tampilan yang konsisten, dan CatatanBelumAktif di halaman detail produk telah dihapus.
 
 **Perbaikan:**
+Menggunakan fungsi `formatRupiah` dari `lib/format.js` dan nomor toko dari `lib/toko.js` serta atribut `target="_blank"` dan `rel="noopener noreferrer"`.
 
 ## US-04 Login admin
 
