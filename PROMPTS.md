@@ -59,10 +59,15 @@ Membuat helper Supabase admin client berbasis cookie di `lib/supabase/auth.js` m
 ## US-05 Ganti password
 
 **Prompt:**
+Baca docs/user-stories.md bagian US-05.
+
+Buat Server Action ganti password di app/admin/actions.js untuk admin yang sedang login, memakai Supabase Auth. Validasi di server: password baru minimal 8 karakter dan harus sama dengan konfirmasi. Tampilkan pesan berhasil atau pesan error yang jelas di halaman. Sambungkan ke form di app/admin/password/page.jsx tanpa mengubah tampilannya. Hapus CatatanBelumAktif dari halaman ini.
 
 **Hasil:**
+Form ganti password di `app/admin/password/page.jsx` berhasil tersambung ke Server Action `gantiPassword`. Validasi server berjalan sesuai ketentuan (minimal 8 karakter dan konfirmasi cocok). Pesan sukses atau error tampil dengan jelas di halaman, dan CatatanBelumAktif telah dihapus.
 
 **Perbaikan:**
+Memeriksa status autentikasi admin di server melalui `supabase.auth.getUser()` sebelum memproses pembaruan password dengan `supabase.auth.updateUser()`.
 
 ## US-06 Proteksi halaman admin
 
