@@ -72,10 +72,15 @@ Memeriksa status autentikasi admin di server melalui `supabase.auth.getUser()` s
 ## US-06 Proteksi halaman admin
 
 **Prompt:**
+Baca AGENTS.md aturan keamanan nomor 3 dan 4, dan docs/user-stories.md bagian US-06.
+
+Buat file proxy.js di root proyek (Next.js 16). Semua rute /admin kecuali /admin/login wajib login dengan Supabase Auth; kalau belum login, alihkan ke /admin/login. Pastikan juga setiap Server Action yang mengubah data memeriksa login di server. Hapus CatatanBelumAktif dari halaman /admin.
 
 **Hasil:**
+File `proxy.js` di root proyek berhasil memproteksi semua rute `/admin` kecuali `/admin/login`. Pengunjung yang belum terautentikasi otomatis dialihkan ke `/admin/login`. Server Action `gantiPassword` memverifikasi sesi admin di sisi server sebelum mengeksekusi perubahan. Komponen `CatatanBelumAktif` pada halaman `/admin` telah dihapus.
 
 **Perbaikan:**
+Menggunakan NextResponse dan createServerClient dari `@supabase/ssr` dengan penanganan cookie pada `proxy.js`, serta matcher `["/admin", "/admin/:path*"]` dengan pengecualian rute `/admin/login`.
 
 ## Debugging dan fitur bonus
 
