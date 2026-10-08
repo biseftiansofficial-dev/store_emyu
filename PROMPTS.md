@@ -46,10 +46,15 @@ Menggunakan fungsi `formatRupiah` dari `lib/format.js` dan nomor toko dari `lib/
 ## US-04 Login admin
 
 **Prompt:**
+Baca AGENTS.md bagian aturan keamanan dan docs/user-stories.md bagian US-04.
+
+Buat login admin memakai Supabase Auth (email dan password) dengan @supabase/ssr dan cookie, memakai SUPABASE_URL dan SUPABASE_PUBLISHABLE_KEY. Login diproses dengan Server Action di app/admin/actions.js dan disambungkan ke form di app/admin/login/page.jsx. Login berhasil diarahkan ke /admin; login gagal menampilkan pesan error yang jelas di halaman login. Buat juga tombol "Keluar" di components/NavAdmin.jsx berfungsi: mengakhiri sesi lalu kembali ke /admin/login. Jangan ubah tampilan. Hapus CatatanBelumAktif dari halaman login.
 
 **Hasil:**
+Form login admin berhasil terhubung ke Server Action menggunakan Supabase Auth (@supabase/ssr). Jika login gagal (misal password salah), muncul notifikasi error yang jelas. Jika berhasil, diarahkan ke `/admin`. Tombol "Keluar" pada NavAdmin berhasil mengakhiri sesi dan kembali ke `/admin/login`. Komponen CatatanBelumAktif telah dihapus.
 
 **Perbaikan:**
+Membuat helper Supabase admin client berbasis cookie di `lib/supabase/auth.js` menggunakan `@supabase/ssr` dan Next.js headers (`cookies`), serta mendefinisikan Server Action `login` dan `logout` di `app/admin/actions.js`.
 
 ## US-05 Ganti password
 
